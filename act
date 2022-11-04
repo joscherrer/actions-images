@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
-act --container-daemon-socket="$XDG_RUNTIME_DIR/podman/podman.sock" --secret-file .secrets --rebuild workflow_dispatch "$@"
