@@ -11,9 +11,14 @@ jobs:
       image: python:latest
     steps:
       - uses: actions/checkout@v3
+      - uses: jitterbit/get-changed-files@v1
+        id: files_changed
+
       - name: Get matrix data
         id: list
         run: python3 .github/workflows/scripts/get_matrix_data.py
+        env:
+          CHANGED: "${{ steps.files_changed.outputs.added_modified }}"
 
   validate:
     runs-on: ubuntu-latest
