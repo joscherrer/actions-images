@@ -12,11 +12,14 @@ def write_output(var, value):
 
 
 CHANGED = os.getenv("CHANGED", None)
+EVENT_NAME = os.getenv("EVENT_NAME", None)
 
-container_files = [
-    Path(f) for f in os.getenv("CHANGED", "").split() if f.endswith(".Containerfile")
-]
-# container_files = list(Path().glob("*.Containerfile"))
+if EVENT_NAME == "worfklow_dispatch":
+    container_files = list(Path().glob("*.Containerfile"))
+elif CHANGED:
+    container_files = [Path(f) for f in CHANGED.split() if f.endswith(".Containerfile")]
+else:
+    container_files = []
 
 data = [{"tag": x.stem, "file": x.name} for x in container_files]
 

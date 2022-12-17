@@ -1,5 +1,6 @@
 on:
   workflow_dispatch:
+  push:
 
 name: Build and push
 jobs:
@@ -19,6 +20,7 @@ jobs:
         run: python3 .github/workflows/scripts/get_matrix_data.py
         env:
           CHANGED: "${{ steps.files_changed.outputs.added_modified }}"
+          EVENT_NAME: "${{ github.event_name }}"
 
   validate:
     runs-on: ubuntu-latest
