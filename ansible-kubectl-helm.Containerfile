@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 
 ARG HELM_VERSION=3.10.3
 ARG TARGETOS=linux
